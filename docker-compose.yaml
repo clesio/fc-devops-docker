@@ -5,8 +5,9 @@ services:
   app:
     build: 
       context: node
+      dockerfile: Dockerfile
     container_name: app
-    entrypoint: dockerize -wait tcp://db:3306 -timeout 20s docker-entrypoint.sh
+#    entrypoint: dockerize -wait tcp://db:3306 -timeout 20s docker-entrypoint.sh
     networks: 
       - node-network
     volumes: 
@@ -31,6 +32,16 @@ services:
     networks: 
       - node-network
 
+  nginx:
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile.prod
+    image: clesiot/nginx:prod
+    container_name: nginx
+    networks: 
+      - node-network
+    ports: 
+      - "8080:80"
     
 
 networks: 
