@@ -1,4 +1,5 @@
-FROM node:15
+FROM node:18.16.0-bullseye
+
 
 WORKDIR /usr/src/app
 
@@ -15,4 +16,6 @@ EXPOSE 3000
 
 COPY . .
 
-CMD node /usr/src/app/index.js
+CMD ["node", "/usr/src/app/index.js"]
+
+
