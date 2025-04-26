@@ -16,6 +16,6 @@ EXPOSE 3000
 
 COPY . .
 
-CMD ["node", "/usr/src/app/index.js"]
+CMD dockerize -wait tcp://db:3306 -timeout 20s node /usr/src/app/index.js
 
 

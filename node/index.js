@@ -13,17 +13,23 @@ const connection = mysql.createConnection(config)
 const sql = `INSERT INTO people(name) values('Clesio')`
 connection.query(sql)
 
-
-
 app.get('/', (req,res) => {
     res.send('<h1>Full Cycle</h1>')
 })
 
-//console.log('Tables in database:');
-//sql.forEach(result => {
-//  const tableName = result[Object.keys(result)[0]];
-//  console.log(tableName);
-//});
+// connection.query('SELECT * FROM people', (error, results) => {
+//     if (error) throw error
+//     console.log(results)
+// })
+
+app.get('/people', (req,res) => {
+    connection.query('SELECT * FROM people', (error, results) => {
+        if (error) throw error
+        res.render('people', {data:results.rows})
+        res.send(results.rows)
+    })
+}
+)
 
 connection.end()
 
